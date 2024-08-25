@@ -1,0 +1,67 @@
+<html>
+<head>
+    <title>cool</title>
+    <link rel="icon" sizes="16x16" href="images/NEWfavicon-16x16.png" type="image/png">
+     <meta name="description" content="Cool Awesome Wow Page">
+    <style>
+        /* Main Content Styles */
+        body {
+            background: url('images/11889738_85d73.gif') repeat;
+            background-size: 200px 200px;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            font-family: Times New Roman, serif;
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 36px;
+            color: #FF0000;
+        }
+        .homepage-link {
+            font-size: 16px;
+            color: #FF0000;
+            text-decoration: none;
+        }
+        .homepage-link:hover {
+            color: #FF6347;
+            text-decoration: underline;
+        }
+        /* Styling for clickable GIF and text */
+        .clickable-gif {
+            cursor: pointer;
+            margin-top: 50px;
+            width: 200px; /* Adjust this value to make the GIF larger or smaller */
+            height: auto; /* Keeps the aspect ratio intact */
+        }
+        .click-text {
+            font-size: 24px;
+            color: #FF0000;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Content -->
+    <div id="mainContent">
+        <h1>COOL AWESOME COOL</h1>
+        <img src="images/4254325432542.gif" alt="Click Me GIF" class="clickable-gif" onclick="playAudio();">
+        <p class="click-text">^^CLICK ME^^</p>
+        <p><a href="index.html" class="homepage-link">HOMEPAGE</a></p>
+        <audio id="backgroundAudio" loop>
+            <source src="images/3472842343.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        // Function to play audio when the GIF is clicked
+        function playAudio() {
+            var audio = document.getElementById('backgroundAudio');
+            audio.play().catch(function() {
+                console.log('Audio play was blocked');
+            });
+        }
+    </script>
+</body>
+</html>
