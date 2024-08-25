@@ -1,0 +1,156 @@
+<html>
+<head>
+<title>EPIC AWESOME COOL!!!</title>
+<link rel="icon" sizes="16x16" href="images/NEWfavicon-16x16.png" type="image/png">
+   <style>
+        #drawingCanvas {
+            border: 1px solid black;
+            display: block;
+            margin: 20px auto;
+        }
+        .toolbar {
+            text-align: center;
+            margin: 20px auto;
+        }
+        .color-picker, .eraser-button {
+            display: inline-block;
+            margin: 5px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            border: 1px solid #000;
+        }
+        .eraser-button {
+            background-color: #ddd;
+            width: auto;
+            padding: 5px 10px;
+            color: black;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-around; /* Adjusted to reduce space between GIFs and canvas */
+            margin: 20px auto;
+        }
+        .gif-container {
+            flex: 1;
+            max-width: 250px; /* Increased size for GIFs */
+            display: flex;
+            justify-content: center;
+        }
+        .gif-container img {
+            width: 100%; /* Ensure GIFs are responsive */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .canvas-container {
+            flex: 2; /* Take up more space between GIFs */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1>COOL PICTURES</h1>
+        <img src="43523523543254325324.jpg" alt="crying" width="300">
+        <img src="43543543543534452.jpg" alt="cheetochan" width="300">
+        <img src="images/5875858584585.png" alt="gold" width="300">
+    </center>
+
+    <center>
+        <p><a href="index.html">HOMEPAGE</a></p>
+        <p>DRAWING BOARD</p>
+    </center>
+
+    <div class="container">
+        <!-- GIFs on the left side -->
+        <div class="gif-container">
+            <img src="images/5432543254.gif" alt="Left GIF" class="left-gif">
+        </div>
+  
+        <!-- Canvas and Toolbar -->
+        <div class="canvas-container">
+            <!-- Toolbar for Colors and Eraser -->
+            <div class="toolbar">
+                <!-- Color buttons -->
+                <div class="color-picker" style="background-color: black;" onclick="changeColor('black')"></div>
+                <div class="color-picker" style="background-color: red;" onclick="changeColor('red')"></div>
+                <div class="color-picker" style="background-color: blue;" onclick="changeColor('blue')"></div>
+                <div class="color-picker" style="background-color: green;" onclick="changeColor('green')"></div>
+                <!-- Eraser button -->
+                <div class="eraser-button" onclick="useEraser()">ERASER</div>
+            </div>
+          
+            <!-- Canvas -->
+            <canvas id="drawingCanvas" width="600" height="400"></canvas>
+        </div>
+
+        <!-- GIFs on the right side -->
+        <div class="gif-container">
+            <img src="images/45325432532.gif" alt="Right GIF" class="right-gif">
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('drawingCanvas');
+        const context = canvas.getContext('2d');
+        let painting = false;
+        let currentColor = 'black';
+        let eraserMode = false;
+
+        function startPosition(e) {
+            painting = true;
+            draw(e);
+        }
+
+        function endPosition() {
+            painting = false;
+            context.beginPath();
+        }
+
+        function draw(e) {
+            if (!painting) return;
+
+            // Prevent default touch actions (like scrolling)
+            if (e.type === 'touchmove' || e.type === 'touchstart') {
+                e.preventDefault();
+            }
+
+            // Get the canvas position relative to the document
+            const rect = canvas.getBoundingClientRect();
+            const x = (e.clientX || e.touches[0].clientX) - rect.left;
+            const y = (e.clientY || e.touches[0].clientY) - rect.top;
+
+            context.lineWidth = eraserMode ? 20 : 5;
+            context.lineCap = 'round';
+            context.strokeStyle = eraserMode ? 'white' : currentColor;
+
+            context.lineTo(x, y);
+            context.stroke();
+            context.beginPath();
+            context.moveTo(x, y);
+        }
+
+        function changeColor(color) {
+            currentColor = color;
+            eraserMode = false;
+        }
+
+        function useEraser() {
+            eraserMode = true;
+        }
+
+        canvas.addEventListener('mousedown', startPosition);
+        canvas.addEventListener('mouseup', endPosition);
+        canvas.addEventListener('mousemove', draw);
+
+        // Add touch event listeners for mobile devices
+        canvas.addEventListener('touchstart', startPosition);
+        canvas.addEventListener('touchend', endPosition);
+        canvas.addEventListener('touchmove', draw);
+    </script>
+</body>
+</html>
